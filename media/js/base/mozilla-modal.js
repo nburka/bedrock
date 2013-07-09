@@ -34,11 +34,12 @@ Mozilla.Modal = (function(w, $) {
         var close_text = window.trans('close');
     }
 
-    var title_text = (typeof options.title == 'string') ? options.title : '';
-
     var html = (
         '<div id="modal" role="dialog" aria-labelledby="' + origin.getAttribute('id') + '" tabindex="-1">' +
         '  <div class="inner">' +
+        '    <button type="button" id="modal-close" class="close">' +
+        '      <span class="close-text">' + close_text + '</span>' +
+        '    </button>' +
         '  </div>' +
         '</div>'
     );
@@ -53,12 +54,10 @@ Mozilla.Modal = (function(w, $) {
     $modal = $('#modal');
 
     $_content = content;
-    $_content.addClass('modal-contents');
     $_content_parent = content.parent();
-    $_content.addClass('overlay-contents');
     $("#modal .inner").append(content);
 
-    // close modal on clicking close button
+    // close modal on clicking close button or background.
     $('#modal-close').click(function (e) {
         _close_modal();
     });
@@ -99,7 +98,7 @@ Mozilla.Modal = (function(w, $) {
     open = true;
 
     // execute (optional) open callback
-    if (options && typeof(options.onCreate) === 'function') {
+    if (typeof(options.onCreate) === 'function') {
         options.onCreate();
     }
 
@@ -107,9 +106,10 @@ Mozilla.Modal = (function(w, $) {
     options = opts;
   };
 
-  var _closeModal = function() {
-    $modal.fadeOut('fast', function() {
-      $(this).remove();
+  var _close_modal = function() {
+    $('#modal').fadeOut('fast', function() {
+        $_content_parent.append($_content);
+        $(this).remove();
     });
 
     // allow page to scroll again

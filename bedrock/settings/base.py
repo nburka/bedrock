@@ -203,8 +203,8 @@ MINIFY_BUNDLES = {
         ),
         'firefox_geolocation': (
             'css/base/mozilla-expanders.less',
-            'css/firefox/geolocation.less',
-            'css/jquery/nyroModal.css'
+            'css/base/mozilla-modal.less',
+            'css/firefox/geolocation.less'
         ),
         'firefox_happy': (
             'css/firefox/happy.less',
@@ -501,9 +501,11 @@ MINIFY_BUNDLES = {
             'js/libs/socialshare.min.js',
         ),
         'geolocation': (
-            'js/libs/jquery.nyroModal.pack.js',
+            'js/libs/jquery-1.4.4.min.js',
             'js/base/mozilla-expanders.js',
             'js/firefox/geolocation-demo.js',
+            'js/base/footer-email-form.js',
+            'js/base/mozilla-modal.js',
         ),
         'home': (
             'js/base/mozilla-pager.js',
@@ -562,6 +564,7 @@ MINIFY_BUNDLES = {
             'js/libs/modernizr.custom.shiv-load.js',
             'js/base/mozilla-input-placeholder.js',
             'js/base/mozilla-pager.js',
+            'js/base/mozilla-modal.js',
             'js/firefox/partners.js',
         ),
         'partners_common': (

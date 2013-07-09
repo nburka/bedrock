@@ -63,7 +63,7 @@ $(document).ready(function() {
 
     $('#try-geolocation').click(function (e) {
         e.preventDefault();
-        Mozilla.Modal.create_modal(this, $('#geo-demo'), { onCreate: geodemo.initialize, title: 'Location-Aware Browsing Demo' });
+        Mozilla.Modal.create_modal(this, $('#geo-demo'), { onCreate: geodemo.initialize });
     });
 
     $('#locateButton').click(function() {
