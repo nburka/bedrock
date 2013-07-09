@@ -10,22 +10,21 @@ Mozilla.Modal = (function(w, $) {
   var _modal = null;
   var $_body = $('body');
   var _options = {};
+  var $_content = null;
+  var $_content_parent = null;
 
   var _init = function() {
     var $d = $(w.document);
 
-    // close modal on clicking close button or background.
-    $d.on('click', '#modal .close', _close_modal);
-
     // close on escape
-    $d.on('keyup', function(e) {
+    $d.keyup(function(e) {
       if (e.keyCode === 27 && _open) { // esc
         _close_modal();
       }
     });
 
     // prevent focusing out of modal while open
-    $d.on('focus', function(e) {
+    $d.focus(function(e) {
       if (_open && !_modal.contains(e.target)) {
         e.stopPropagation();
         _modal.focus();
@@ -53,11 +52,12 @@ Mozilla.Modal = (function(w, $) {
         var close_text = window.trans('close');
     }
 
-    var title_text = (typeof options.title == 'string') ? options.title : '';
-
     var html = (
         '<div id="modal" role="dialog" aria-labelledby="' + origin.getAttribute('id') + '" tabindex="-1">' +
         '  <div class="inner">' +
+        '    <button type="button" id="modal-close" class="close">' +
+        '      <span class="close-text">' + close_text + '</span>' +
+        '    </button>' +
         '  </div>' +
         '</div>'
     );
@@ -72,21 +72,12 @@ Mozilla.Modal = (function(w, $) {
     _modal = $('#modal');
 
     $_content = content;
-    $_content.addClass('modal-contents');
     $_content_parent = content.parent();
-    $_content.addClass('overlay-contents');
     $("#modal .inner").append(content);
 
-    // close modal on clicking close button
+    // close modal on clicking close button or background.
     $('#modal-close').click(function (e) {
         _close_modal();
-    });
-
-    // close modal on clicking the background (but not bubbled event).
-    $('#modal').click(function (e) {
-        if (e.target == this) {
-            _close_modal();
-        }
     });
 
     _modal.fadeIn('fast', function() {
@@ -99,7 +90,7 @@ Mozilla.Modal = (function(w, $) {
     _open = true;
 
     // execute (optional) open callback
-    if (options && typeof(options.onCreate) === 'function') {
+    if (typeof(options.onCreate) === 'function') {
         options.onCreate();
     }
 
@@ -109,7 +100,8 @@ Mozilla.Modal = (function(w, $) {
 
   var _close_modal = function() {
     $('#modal').fadeOut('fast', function() {
-      $(this).remove();
+        $_content_parent.append($_content);
+        $(this).remove();
     });
 
     $_body.removeClass('noscroll');
