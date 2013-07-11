@@ -535,12 +535,6 @@
 .overlay-contents {
     padding: 0 100px;
     .clearfix();
-    background: #fff;
-    margin: 0 auto;
-    .border-radius(4px);
-    img {
-        max-width: 100%;
-    }
     .footer {
         background: #f2f2f2;
         color: #8b8b8b;
@@ -559,8 +553,6 @@
     padding: 0;
 }
 
-=======
->>>>>>> 06d0066... add the modal window to all uses of modals (except 2011 report page), bring up to date with latest addition to the options param, add resources for all files to base.py
 #testimonials,
 #mwc-wrapup {
     h2 {
@@ -698,30 +690,6 @@
 /* }}} */
 /* {{{ Responsive Grid */
 
-/* Desktop Layout */
-@media only screen and (min-width: @breakDesktop) {
-    #modal .inner {
-        width: @widthDesktop;
-        margin: 60px auto;
-        .footer {
-            .clearfix();
-            padding-left: 30px;
-            padding-right: 30px;
-            div {
-                padding: 0;
-                .span(4);
-                &:first-child {
-                    margin-left: 0;
-                }
-                &:last-child {
-                    margin-right: 0;
-                }
-            }
-        }
-    }
-}
-
-
 /* Tablet Layout */
 @media only screen and (min-width: @breakTablet) {
 
@@ -808,13 +776,6 @@
             font-size: 48px;
         }
     }
-
-    #modal .inner {
-        .span_narrow(12);
-        float: none;
-        margin: 60px auto;
-    }
-
 }
 
 

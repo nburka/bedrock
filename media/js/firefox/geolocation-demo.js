@@ -11,6 +11,8 @@ var geodemo = {
         map.setCenter(new GLatLng(37.41, -122.08), 1);
         map.addControl(new GSmallMapControl());
         map.addControl(new GMapTypeControl());
+
+        $('#geodemo-error, #geo-busy').hide();
     },
 
     getCircleOverlay: function(lat, lon, err) {

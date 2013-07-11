@@ -21,24 +21,22 @@
         position: relative;
         margin: 40px auto;
         padding: 20px;
-        color: #333;
+        color: #f3f3f3;
 
-        .modal-window {
+        .overlay-contents {
             background: #fff;
+            padding: 20px;
             margin: 0 auto;
+            .border-radius(4px);
             @shadow: 0 1px 22px rgba(0, 0, 0, 0.8);
             .box-shadow(@shadow);
             img {
                 max-width: 100%;
             }
-
-            .modal-contents {
-                padding: 20px;
-            }
         }
     }
 
-    #modal-close {
+    .close {
         position: fixed;
         z-index: 99;
         display: inline;
@@ -57,49 +55,40 @@
         background: rgb(0,0,0) url(/media/img/firefox/partners/closex.png) right center no-repeat;
         background: rgba(0,0,0,0.6) url(/media/img/firefox/partners/closex.png) right center no-repeat;
 
-        .modal-close {
-            position: fixed;
-            z-index: 99;
-            display: block;
-            position: absolute;
-            top: 25px;
-            right: 25px;
-            width: 25px;
-            cursor: pointer;
-            background: url(/media/img/base/modal-close.png) right top no-repeat;
-            height: 32px;
-            width: 32px;
-            border: 0;
-            text-indent: 200%;
-            overflow: hidden;
-
-            &:hover,
-            &:focus {
-                background-position: right -32px;
-            }
-
-            .close-text {
-                text-indent: 100%;
-            }
+        &:hover,
+        &:focus {
+          text-decoration: underline;
+          color: #eee;
         }
     }
-}
-
-body.noscroll {
-  overflow: hidden;
 }
 
 @media only screen and (min-width: @breakDesktop) {
     #modal .inner {
         width: @widthDesktop;
         margin: 60px auto;
+        .footer {
+            .clearfix();
+            padding-left: 30px;
+            padding-right: 30px;
+            div {
+                padding: 0;
+                .span(4);
+                &:first-child {
+                    margin-left: 0;
+                }
+                &:last-child {
+                    margin-right: 0;
+                }
+            }
+        }
     }
 }
 
-@media only screen and (max-width: @breakTablet) {
-    body #modal .inner {
-        margin: 10px auto;
-        width: 90%;
+@media only screen and (min-width: @breakTablet) and (max-width: @breakDesktop) {
+    #modal .inner {
+        .span_narrow(12);
+        float: none;
+        margin: 60px auto;
     }
 }
-
