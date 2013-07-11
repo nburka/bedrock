@@ -58,14 +58,6 @@ Mozilla.Modal = (function(w, $) {
     var html = (
         '<div id="modal" role="dialog" aria-labelledby="' + origin.getAttribute('id') + '" tabindex="-1">' +
         '  <div class="inner">' +
-        '    <div class="modal-window">' +
-        '      <div class="modal-header">' +
-        '        <div class="modal-title">' + title_text + '</div>' +
-        '        <button type="button" class="modal-close">' +
-        '          <span class="close-text">' + close_text + '</span>' +
-        '        </button>' +
-        '      </div>' +
-        '    </div>' +
         '  </div>' +
         '</div>'
     );
@@ -85,7 +77,7 @@ Mozilla.Modal = (function(w, $) {
     $("#modal .modal-window").append(content);
 
     // close modal on clicking close button
-    $('#modal .modal-close').click(function (e) {
+    $('#modal-close').click(function (e) {
         _close_modal();
     });
 
