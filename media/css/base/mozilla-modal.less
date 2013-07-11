@@ -38,13 +38,24 @@
         }
     }
 
-    .modal-header {
-        background-color: #0095dd;
-        padding: 10px 20px;
-        color: #fff;
-        font-size: 16px;
-        .open-sans-light;
-        min-height: 23px;
+    #modal-close {
+        position: fixed;
+        z-index: 99;
+        display: inline;
+        position: absolute;
+        top: 25px;
+        right: 25px;
+        color: #ccc;
+        font-family: 'Open Sans', sans-serif;
+        font-size: 12px;
+        font-weight: bold;
+        text-transform: uppercase;
+        padding: 5px 28px 5px 5px;
+        cursor: pointer;
+        border: 0;
+        .border-radius(6px);
+        background: rgb(0,0,0) url(/media/img/firefox/partners/closex.png) right center no-repeat;
+        background: rgba(0,0,0,0.6) url(/media/img/firefox/partners/closex.png) right center no-repeat;
 
         .modal-close {
             position: fixed;
