@@ -69,18 +69,15 @@ var geodemo = {
 
 $(document).ready(function() {
     if (!navigator.geolocation) return true; // Fx 3.5+ only
-    $('#try-geolocation')
-        .nyroModal({
-            minWidth: 510,
-            minHeight: 400,
-            processHandler: function() {
-                $('#geodemo-error, #geo-busy').hide();
-            },
-            endShowContent: function() {
-                geodemo.initialize();
-            }
-        })
-        .show();
+    var that = this;
+
+    $('#try-geolocation').show();
+
+    $('#try-geolocation').click(function (e) {
+        e.preventDefault();
+        Mozilla.Modal.create_modal(this, $('#geo-demo'), { onCreate: geodemo.initialize, title: 'Location-Aware Browsing Demo' });
+    });
+
     $('#locateButton').click(function() {
         geodemo.locateMeOnMap();
     });

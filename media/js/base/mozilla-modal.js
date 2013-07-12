@@ -47,12 +47,25 @@ Mozilla.Modal = (function(w, $) {
     $('.modalOrigin').removeClass('modalOrigin');
 
     // Create new modal
+    if (typeof(window.trans) == "undefined") {
+        var close_text = 'close'; // works on older pages on the site
+    } else {
+        var close_text = window.trans('close');
+    }
+
+    var title_text = (typeof options.title == 'string') ? options.title : '';
+
     var html = (
         '<div id="modal" role="dialog" aria-labelledby="' + origin.getAttribute('id') + '" tabindex="-1">' +
         '  <div class="inner">' +
-        '    <button type="button" id="modal-close" class="close">' +
-        '      <span class="close-text">' + window.trans('close') + '</span>' +
-        '    </button>' +
+        '    <div class="modal-window">' +
+        '      <div class="modal-header">' +
+        '        <div class="modal-title">' + title_text + '</div>' +
+        '        <button type="button" class="modal-close">' +
+        '          <span class="close-text">' + close_text + '</span>' +
+        '        </button>' +
+        '      </div>' +
+        '    </div>' +
         '  </div>' +
         '</div>'
     );
@@ -66,7 +79,22 @@ Mozilla.Modal = (function(w, $) {
 
     _modal = $('#modal');
 
-    $("#modal .inner").append(content);
+    $_content = content;
+    $_content.addClass('modal-contents');
+    $_content_parent = content.parent();
+    $("#modal .modal-window").append(content);
+
+    // close modal on clicking close button
+    $('#modal .modal-close').click(function (e) {
+        _close_modal();
+    });
+
+    // close modal on clicking the background (but not bubbled event).
+    $('#modal').click(function (e) {
+        if (e.target == this) {
+            _close_modal();
+        }
+    });
 
     _modal.fadeIn('fast', function() {
       $(this).focus();
