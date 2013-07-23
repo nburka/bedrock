@@ -216,6 +216,7 @@ MINIFY_BUNDLES = {
             'css/firefox/organizations.less',
         ),
         'firefox_os': (
+            'css/base/mozilla-modal.less',
             'css/libs/jquery.pageslide.css',
             'css/firefox/os/firefox-os.less',
         ),

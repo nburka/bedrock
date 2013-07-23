@@ -170,7 +170,10 @@
       $signup_content = $('#email-form-content').detach();
     }
 
-    Mozilla.Modal.createModal(this, $signup_content, { onDestroy: reattachSignupContent, allowScroll: true });
+    Mozilla.Modal.create_modal(this, $signup_content, {
+        allowScroll: true,
+        title: '<img src="/media/img/firefox/os/logo/firefox-os-white.png" alt="mozilla" />'
+    });
 
     //track GA event for newsletter CTA
     trackGAEvent(['_trackEvent', 'FxOs Consumer Page', 'click', cta]);
@@ -179,10 +182,6 @@
   $('#sign-up-form-close').on('click', function() {
     Mozilla.Modal.closeModal();
   });
-
-  function reattachSignupContent() {
-    $('#email-form-wrapper').append($signup_content);
-  }
 
   // reallly primative validation e.g a@a
   // matches built-in validation in Firefox
@@ -251,15 +250,18 @@
       $get_phone_content = $('#get-phone').detach();
     }
 
+<<<<<<< HEAD
     Mozilla.Modal.createModal(this, $get_phone_content, { onDestroy: reattachGetPhoneContent, allowScroll: true });
+=======
+    Mozilla.Modal.create_modal(this, $get_phone_content, {
+        allowScroll: true,
+        title: '<img src="/media/img/firefox/os/logo/firefox-os-white.png" alt="mozilla" />'
+    });
+>>>>>>> add the modal window to all uses of modals (except 2011 report page), bring up to date with latest addition to the options param, add resources for all files to base.py
 
     //track GA event for get a phone CTA
     trackGAEvent(['_trackEvent', 'FxOs Consumer Page', 'click', 'Get a Phone']);
   });
-
-  var reattachGetPhoneContent = function() {
-    $('#get-phone-wrapper').append($get_phone_content);
-  };
 
   // toggle sticky masthead when tabzilla is opened/closed
   $tabzilla.on('click', function () {

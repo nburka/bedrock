@@ -1,0 +1,94 @@
+// This Source Code Form is subject to the terms of the Mozilla Public
+// License, v. 2.0. If a copy of the MPL was not distributed with this
+// file, You can obtain one at http://mozilla.org/MPL/2.0/.
+
+@import "../sandstone/lib.less";
+
+#modal {
+    background: #354b5d;
+    background: rgba(53, 75, 93, 0.8);
+    width: 100%;
+    height: 101%;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 9999999;
+    overflow: auto;
+
+    .inner {
+        position: relative;
+        margin: 40px auto;
+        padding: 20px;
+        color: #333;
+
+        .modal-window {
+            background: #fff;
+            margin: 0 auto;
+            @shadow: 0 1px 22px rgba(0, 0, 0, 0.8);
+            .box-shadow(@shadow);
+            img {
+                max-width: 100%;
+            }
+
+            .modal-contents {
+                padding: 20px;
+            }
+        }
+    }
+
+    .modal-header {
+        background-color: #0095dd;
+        padding: 10px 20px;
+        color: #fff;
+        font-size: 16px;
+        .open-sans-light;
+        min-height: 23px;
+
+        .modal-close {
+            position: fixed;
+            z-index: 99;
+            display: block;
+            position: absolute;
+            top: 25px;
+            right: 25px;
+            width: 25px;
+            cursor: pointer;
+            background: url(/media/img/base/modal-close.png) right top no-repeat;
+            height: 32px;
+            width: 32px;
+            border: 0;
+            text-indent: 200%;
+            overflow: hidden;
+
+            &:hover,
+            &:focus {
+                background-position: right -32px;
+            }
+
+            .close-text {
+                text-indent: 100%;
+            }
+        }
+    }
+}
+
+body.noscroll {
+  overflow: hidden;
+}
+
+@media only screen and (min-width: @breakDesktop) {
+    #modal .inner {
+        width: @widthDesktop;
+        margin: 60px auto;
+    }
+}
+
+@media only screen and (max-width: @breakTablet) {
+    body #modal .inner {
+        margin: 10px auto;
+        width: 90%;
+    }
+}
+
