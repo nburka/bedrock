@@ -38,9 +38,8 @@ Mozilla.Modal = (function(w, $) {
         '</div>'
     );
 
-    // Restrict scrolling
-    if (!opts.allowScroll) {
-      $body.addClass('noscroll');
+    if (options && !options.allowScroll) {
+        $_body.addClass('noscroll');
     }
 
     // Add modal to page
@@ -80,8 +79,8 @@ Mozilla.Modal = (function(w, $) {
     open = true;
 
     // execute (optional) open callback
-    if (typeof(opts.onCreate) === 'function') {
-      opts.onCreate();
+    if (options && typeof(options.onCreate) === 'function') {
+        options.onCreate();
     }
 
     // store options for later use
@@ -106,8 +105,8 @@ Mozilla.Modal = (function(w, $) {
     $d.off('.' + evtNamespace);
 
     // execute (optional) callback
-    if (typeof(options.onDestroy) === 'function') {
-      options.onDestroy();
+    if (options && typeof(_options.onDestroy) === 'function') {
+      _options.onDestroy();
     }
 
     // free up options
@@ -123,3 +122,7 @@ Mozilla.Modal = (function(w, $) {
     }
   };
 })(window, window.jQuery);
+
+$(document).ready(function() {
+  Mozilla.Modal.init();
+});
