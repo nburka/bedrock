@@ -57,8 +57,8 @@ Mozilla.Modal = (function(w, $) {
         '</div>'
     );
 
-    if (!options.allowScroll) {
-      $_body.addClass('noscroll');
+    if (options && !options.allowScroll) {
+        $_body.addClass('noscroll');
     }
 
     // Add it to the page.
@@ -78,8 +78,8 @@ Mozilla.Modal = (function(w, $) {
     _open = true;
 
     // execute (optional) open callback
-    if (typeof(options.onCreate) === 'function') {
-      options.onCreate();
+    if (options && typeof(options.onCreate) === 'function') {
+        options.onCreate();
     }
 
     // store options for later use
@@ -100,7 +100,7 @@ Mozilla.Modal = (function(w, $) {
     _modal = null;
 
     // execute (optional) callback
-    if (typeof(_options.onDestroy) === 'function') {
+    if (options && typeof(_options.onDestroy) === 'function') {
       _options.onDestroy();
     }
 
