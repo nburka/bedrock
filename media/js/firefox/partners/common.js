@@ -25,7 +25,6 @@
                 // handler must exist
             },
             unmatch: function() {
-                closeModal();
                 w.detach_mobile();
             }
         }, false).register("screen and (min-width: 1000px)", {

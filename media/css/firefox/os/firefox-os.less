@@ -1302,28 +1302,23 @@ html[lang="pl"] {
     display: none;
   }
 
-  .modal-content {
-    width: 990px;
-    margin: 0 auto;
-    background: #fff;
-    @shadow: 0 1px 22px rgba(0, 0, 0, 0.8);
-    .box-shadow(@shadow);
-    
-    header {
-      display: block;
-      background: #0095dd;
-      padding: @baseLine (@baseLine * 1.5) (@baseLine * 0.5);
-      img {
-        float: left;
-      }
+  #modal {
+    .modal-header {
+       min-height: 48px;
+       padding: 10px 20px 3px 20px;
+       .modal-close {
+         top: 33px;
+         right: 33px;
+       }
     }
+  }
 
+  .modal-content {
     h2 {
       background: url('/media/img/firefox/os/purchase-hr.png') center bottom no-repeat;
     }
 
     .content {
-      padding: (@baseLine * 1.5) (@baseLine * 1.5);
       color: #666;
       .open-sans-light;
     }
@@ -1333,24 +1328,6 @@ html[lang="pl"] {
     #provider-text-single { display: block; }
 
     .close {
-      float: right;
-      background: url(/media/img/firefox/os/closex-purchase.png) right top no-repeat;
-      height: 32px;
-      padding-right: 39px;
-      margin-top: 4px;
-      overflow: hidden;
-      border: 0;
-      cursor: pointer;
-      .close-text {
-        color: #fff;
-        font-size: 16px;
-        .open-sans-light;
-        line-height: 14px;
-      }
-
-      &:hover {
-        background-position: right -32px;
-      }
     }
   }
 
@@ -1447,41 +1424,6 @@ html[lang="en-US"].js {
   margin: 0;
   z-index: 101;
 }
-
-// modal
-body.noscroll {
-  overflow: hidden;
-}
-
-#modal {
-  background: #354b5d;
-  background: rgba(53, 75, 93, 0.8);
-  width: 100%;
-  height: 101%;
-  position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  z-index: 9999999;
-  overflow: auto;
-  display: none;
-
-  header {
-    height: 48px;
-  }
-}
-
-#modal .inner {
-  margin: 40px auto;
-  padding: 0 20px;
-  color: #f3f3f3;
-}
-
-#modal-close {
-  display: none;
-}
-// end generic modal
 
 /* Tablet Layout: 760px */
 @media only screen and (min-width: @breakTablet) and (max-width: @breakDesktop) {
@@ -1656,9 +1598,6 @@ body.noscroll {
     width: @widthTablet;
   }
   .js {
-    .modal-content {
-      width: @widthTablet - (@gridGutterWidth * 2);
-    }
     #get-firefox-os.scroller-on {
       #adaptive-app-search {
         ul {
@@ -1951,26 +1890,13 @@ body.noscroll {
     width: @widthMobileLandscape - @gridGutterWidth;
   }
   .js {
-    #modal {
-      width: 100%;
-      bottom: auto;
-      right: auto;
-      .inner {
-        margin: 5px auto;
-        padding: 0 10px;
-      }
-    }
     .modal-content {
-      width: 100%;
-      .content {
-        padding: 10px;
-      }
       #provider-links {
         .last {
           border-left: none;
         }
-      }  
-    } 
+      }
+    }
     #get-phone {
       width: 100%;
     }
@@ -2197,37 +2123,7 @@ body.noscroll {
         letter-spacing: 0;
       }
     }
-    #modal {
-      width: 100%;
-      bottom: auto;
-      right: auto;
-      .inner {
-        margin: 5px auto;
-        padding: 0 10px;
-      }
-      header {
-        height: 28px;
-      }
-    }
     .modal-content {
-      width: 100%;
-      .content {
-        padding: 10px;
-      }
-      header {
-        padding: 10px;
-        img {
-          display: none;
-        }
-        button {
-          span {
-            font-size: 14px;
-          }
-        }
-      }
-      .close {
-        margin-top: 0;
-      }
       h2 {
         font-size: 22px;
         line-height: 26px;

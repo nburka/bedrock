@@ -38,11 +38,6 @@
 {% block page_title_prefix %}{% endblock %}
 {% block page_title %}{{ _('Firefox OS, Marketplace, Android — Partners') }}{% endblock %}
 
-{% block string_data %}
-  {# L10n: This is the label for a button that closes a modal dialog #}
-  data-close="{{ _('Close') }}"
-{% endblock %}
-
 {% block site_header %}
   <header id="masthead">
     <a href="{{ url('mozorg.home') }}" id="tabzilla">{{ _('Mozilla') }}</a>
@@ -559,7 +554,6 @@
       {{ form.superpriority }}
 
       </form>
-      <button type="button" class="close">{{ _('Close') }}</button>
     </section>
   </article>
 </div>
