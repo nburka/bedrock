@@ -119,11 +119,28 @@ def platform_img(url, optional_attributes={}):
     url = path.join(settings.MEDIA_URL, url.lstrip('/'))
 
     # Don't download any image until the javascript sets it based on
-    # data-src so we can to platform detection. If no js, show the
+    # data-src so we can do platform detection. If no js, show the
     # windows version.
     markup = ('<img class="platform-img js" src="" data-src="%s" %s>'
               '<noscript><img class="platform-img win" src="%s" %s></noscript>'
               % (url, attrs, url, attrs))
+
+    return jinja2.Markup(markup)
+
+@jingo.register.function
+def hires_img(url, width, height, optional_attributes = {}):
+    attrs = ' '.join(('%s="%s"' % (attr, val)
+                      for attr, val in optional_attributes.items()))
+
+    url = media(url)
+
+    # Don't download any image until the javascript sets it based on
+    # data-src so we can do high-dpi detection. If no js, show the
+    # normal-res version.
+    markup = ('<img class="js" src="" data-src="%s" '
+              'width="%s" height="%s" data-hires="true" %s>'
+              '<noscript><img src="%s" %s></noscript>'
+              % (url, width, height, attrs, url, attrs))
 
     return jinja2.Markup(markup)
 
