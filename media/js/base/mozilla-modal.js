@@ -28,7 +28,7 @@ Mozilla.Modal = (function(w, $) {
     }
 
     // Create new modal
-    if (typeof(window.trans) == "undefined") {
+    if (typeof window.trans == "undefined") {
         var close_text = 'close'; // works on older pages on the site
     } else {
         var close_text = window.trans('close');
@@ -125,7 +125,7 @@ Mozilla.Modal = (function(w, $) {
     $d.off('.' + evtNamespace);
 
     // execute (optional) callback
-    if (options && typeof(_options.onDestroy) === 'function') {
+    if (_options && typeof(_options.onDestroy) === 'function') {
       _options.onDestroy();
     }
 
