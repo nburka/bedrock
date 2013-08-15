@@ -38,6 +38,8 @@ Embedding images
 
 Images should be included on pages using helper functions.
 
+media()
+^^^^^^^^^^^
 For a simple image, the `media()` function is used to generate the image URL. For example::
 
 	<img src="{{ media('img/firefox/new/firefox-logo.png') }}" alt="Firefox" />
@@ -46,17 +48,24 @@ will output an image::
 
     <img src="/media/img/firefox/new/firefox-logo.png" alt="Firefox">
 
+hires_img()
+^^^^^^^^^^^
 For images that include a high-resolution alternative for displays with a high pixel density, use the `hires_img()` function::
 
     hires_img('img/firefox/new/firefox-logo.png', 200, 100, {'alt': 'Firefox'})
 
 The `hires_img()` function will automatically look for the image in the URL parameter suffixed with `'-hires'`, e.g. `img/firefox/new/firefox-logo-hires.png` and switch to it if the display has high pixel density.
 
+img_l10n()
+^^^^^^^^^^
 Images that have translatable text can be handled with `img_l10n()`::
+
 	<img src="{{ img_l10n('firefox/os/have-it-all/messages.jpg') }}" />
 
-The images referenced by `img_l10n()` must exist in `media/img/l10n/`, so for above example, the images are `media/img/l10n/en-US/firefox/os/have-it-all/messages.jpg` and `media/img/l10n/es-ES/firefox/os/have-it-all/messages.jpg`.
+The images referenced by `img_l10n()` must exist in `media/img/l10n/`, so for above example, the images could include `media/img/l10n/en-US/firefox/os/have-it-all/messages.jpg` and `media/img/l10n/es-ES/firefox/os/have-it-all/messages.jpg`.
 
+platform_img()
+^^^^^^^^^^^^^^
 Finally, for outputting an image that differs depending on the platform being used, the `platform_img()` function will automatically display the image for the user's browser::
 
     platform_img('img/firefox/new/browser.png', {alt: 'Firefox screenshot'})
