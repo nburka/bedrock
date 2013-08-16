@@ -128,9 +128,12 @@ def platform_img(url, optional_attributes={}):
     return jinja2.Markup(markup)
 
 @jingo.register.function
-def hires_img(url, width, height, optional_attributes={}):
-    attrs = ' '.join(('%s="%s"' % (attr, val)
-                      for attr, val in optional_attributes.items()))
+def hires_img(url, width, height, optional_attributes=None):
+    if optional_attributes:
+        attrs = ' '.join(('%s="%s"' % (attr, val)
+                          for attr, val in optional_attributes.items()))
+    else:
+        attrs = ''
 
     url = media(url)
 
