@@ -45,19 +45,14 @@ function init_platform_imgs() {
             suffix = '-linux';
         }
 
-        if ($img.data('hires-src') && isHighDpi()) {
-            var orig_src = $img.data('hires-src');
-        } else {
-            var orig_src = $img.data('src');
-        }
-
+        var orig_src = $img.data('src');
         var i = orig_src.lastIndexOf('.');
         var base = orig_src.substring(0, i);
         var ext = orig_src.substring(i);
         var src = base + suffix + ext;
 
-        if ($img.data('hires') && isHighDpi()) {
-            src = convert_url_to_hires(src);
+        if ($img.data('hires') && Mozilla.Hires.isHighDpi()) {
+            src = Mozilla.Hires.convertUrlToHires(src);
         }
 
         this.src = src;
@@ -66,32 +61,11 @@ function init_platform_imgs() {
     });
 }
 
-// high resolution (aka retina/at2x) images
-
-function convert_url_to_hires(url) {
-    var i = url.lastIndexOf('.');
-    var base = url.substring(0, i);
-    var ext = url.substring(i);
-    return base + '-hires' + ext;
-}
-
-function init_hires_imgs() {
-    $('img[src=""][data-src][data-hires="true"]').each(function() {
-        var src = $(this).data('src');
-        if (isHighDpi()) {
-            src = convert_url_to_hires(src);
-        }
-
-        this.src = src;
-    });
-}
-
 // init
 
 $(document).ready(function() {
     init_download_links();
     init_platform_imgs();
-    init_hires_imgs();
     $(window).on('load', function () {
         $('html').addClass('loaded');
     });
