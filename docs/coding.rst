@@ -52,7 +52,7 @@ hires_img()
 ^^^^^^^^^^^
 For images that include a high-resolution alternative for displays with a high pixel density, use the `hires_img()` function::
 
-    hires_img('img/firefox/new/firefox-logo.png', 200, 100, {'alt': 'Firefox'})
+    hires_img('img/firefox/new/firefox-logo.png', {'alt': 'Firefox', 'width': '200', 'height': '100'})
 
 The `hires_img()` function will automatically look for the image in the URL parameter suffixed with `'-hires'`, e.g. `img/firefox/new/firefox-logo-hires.png` and switch to it if the display has high pixel density.
 

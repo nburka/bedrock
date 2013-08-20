@@ -128,7 +128,7 @@ def platform_img(url, optional_attributes={}):
     return jinja2.Markup(markup)
 
 @jingo.register.function
-def hires_img(url, width, height, optional_attributes=None):
+def hires_img(url, optional_attributes=None):
     if optional_attributes:
         attrs = ' '.join(('%s="%s"' % (attr, val)
                           for attr, val in optional_attributes.items()))
@@ -140,10 +140,9 @@ def hires_img(url, width, height, optional_attributes=None):
     # Don't download any image until the javascript sets it based on
     # data-src so we can do high-dpi detection. If no js, show the
     # normal-res version.
-    markup = ('<img class="js" src="" data-src="%s" '
-              'width="%s" height="%s" data-hires="true" %s>'
+    markup = ('<img class="js" src="" data-src="%s" data-hires="true" %s>'
               '<noscript><img src="%s" %s></noscript>'
-              % (url, width, height, attrs, url, attrs))
+              % (url, attrs, url, attrs))
 
     return jinja2.Markup(markup)
 
