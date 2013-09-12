@@ -17,48 +17,55 @@
     z-index: 9999999;
     overflow: auto;
 
-    .inner {
-        position: relative;
+    .window {
         margin: 40px auto;
         padding: 20px;
         color: #333;
 
-        .overlay-contents {
-            background: #fff;
-            padding: 20px;
-            margin: 0 auto;
-            .border-radius(4px);
+        .inner {
+            position: relative;
             @shadow: 0 1px 22px rgba(0, 0, 0, 0.8);
             .box-shadow(@shadow);
-            img {
-                max-width: 100%;
+
+            header {
+                display: block;
+                background: #0095dd;
+                padding: 10px @baseLine 10px;
+                height: 38px;
             }
-        }
-    }
 
-    .close {
-        position: fixed;
-        z-index: 99;
-        display: inline;
-        position: absolute;
-        top: 25px;
-        right: 25px;
-        color: #ccc;
-        font-family: 'Open Sans', sans-serif;
-        font-size: 12px;
-        font-weight: bold;
-        text-transform: uppercase;
-        padding: 5px 28px 5px 5px;
-        cursor: pointer;
-        border: 0;
-        .border-radius(6px);
-        background: rgb(0,0,0) url(/media/img/firefox/partners/closex.png) right center no-repeat;
-        background: rgba(0,0,0,0.6) url(/media/img/firefox/partners/closex.png) right center no-repeat;
+            .close {
+                position: fixed;
+                z-index: 99;
+                display: inline;
+                position: absolute;
+                top: 12px;
+                right: @baseLine;
+                color: #fff;
+                font-family: 'Open Sans', sans-serif;
+                font-size: 16px;
+                padding: 5px 28px 5px 5px;
+                cursor: pointer;
+                border: 0;
+                background: url(/media/img/base/modal-close.png) right top no-repeat;
+                height: 32px;
+                padding-right: 40px;
 
-        &:hover,
-        &:focus {
-          text-decoration: underline;
-          color: #eee;
+                &:hover,
+                &:focus {
+                    color: rgba(255, 255, 255, 0.8);
+                    background-position: right -32px;
+                }
+            }
+
+            .overlay-contents {
+                background: #fff;
+                padding: @baseLine;
+                margin: 0 auto;
+                img {
+                    max-width: 100%;
+                }
+            }
         }
     }
 }

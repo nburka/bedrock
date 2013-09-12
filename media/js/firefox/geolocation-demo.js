@@ -13,6 +13,9 @@ $(document).ready(function() {
                 zoom: 1,
                 mapTypeId: google.maps.MapTypeId.ROADMAP
             });
+
+            $('#locateButton').siblings('img').hide();
+            $('#geodemo-error').hide();
         },
 
         handleSuccess: function(position) {
@@ -63,7 +66,7 @@ $(document).ready(function() {
 
     $('#try-geolocation').click(function (e) {
         e.preventDefault();
-        Mozilla.Modal.create_modal(this, $('#geo-demo'), { onCreate: geodemo.initialize });
+        Mozilla.Modal.createModal(this, $('#geo-demo'), { onCreate: geodemo.initialize });
     });
 
     $('#locateButton').click(function() {

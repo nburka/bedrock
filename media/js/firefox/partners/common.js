@@ -55,7 +55,7 @@
         // Extract the target element's ID from the link's href.
         var elem = $(this).attr('href').replace(/.*?(#.*)/g, '$1');
 
-        Mozilla.Modal.create_modal(this, elem);
+        Mozilla.Modal.createModal(this, elem);
 
         return false;
     });

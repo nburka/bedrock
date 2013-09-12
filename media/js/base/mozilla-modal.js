@@ -13,6 +13,9 @@ Mozilla.Modal = (function(w, $) {
   var $d = $(w.document);
   var evtNamespace = 'moz-modal';
 
+  var $_content_parent;
+  var $_content;
+
   /*
     origin: element that triggered the modal
     content: content to display in the modal
@@ -21,31 +24,38 @@ Mozilla.Modal = (function(w, $) {
       onDestroy: function to fire after modal has been closed
       allowScroll: boolean - allow/restrict page scrolling when modal is open
   */
-  var _createModal = function(origin, content, opts) {
+  var _create_modal = function(origin, content, opts) {
+    options = opts;
+
     // Make sure modal is closed (if one exists)
     if (open) {
-      _closeModal();
+        _close_modal();
     }
 
     // Create new modal
     if (typeof window.trans == "undefined") {
-        var close_text = 'close'; // works on older pages on the site
+        var close_text = 'Close'; // works on older pages on the site
     } else {
-        var close_text = window.trans('close');
+        //TODO var close_text = window.trans('close');
+        var close_text = 'Close';
     }
 
-    var html = (
+    var title = (options && options.title) ? options.title : '';
+
+    var html =
         '<div id="modal" role="dialog" aria-labelledby="' + origin.getAttribute('id') + '" tabindex="-1">' +
-        '  <div class="inner">' +
-        '    <button type="button" id="modal-close" class="close">' +
-        '      <span class="close-text">' + close_text + '</span>' +
-        '    </button>' +
+        '  <div class="window">' +
+        '    <div class="inner">' +
+        '      <header>' + title + '</header>' +
+        '      <button type="button" id="modal-close" class="close">' +
+        '        <span class="close-text">' + close_text + '</span>' +
+        '      </button>' +
+        '    </div>' +
         '  </div>' +
-        '</div>'
-    );
+        '</div>';
 
     if (options && !options.allowScroll) {
-        $_body.addClass('noscroll');
+        $body.addClass('noscroll');
     }
 
     // Add modal to page
@@ -55,6 +65,7 @@ Mozilla.Modal = (function(w, $) {
 
     $_content = content;
     $_content_parent = content.parent();
+
     $("#modal .inner").append(content);
     $_content.addClass('overlay-contents');
 
@@ -71,17 +82,14 @@ Mozilla.Modal = (function(w, $) {
     });
 
     $modal.fadeIn('fast', function() {
-      $modal.focus();
+        $modal.focus();
     });
-
-    // close modal on clicking close button
-    $d.on('click.' + evtNamespace, '#modal .close', _closeModal);
 
     // close with escape key
     $d.on('keyup.' + evtNamespace, function(e) {
-      if (e.keyCode === 27 && open) {
-        _closeModal();
-      }
+        if (e.keyCode === 27 && open) {
+            _close_modal();
+        }
     });
 
     // prevent focusing out of modal while open
@@ -99,12 +107,9 @@ Mozilla.Modal = (function(w, $) {
     open = true;
 
     // execute (optional) open callback
-    if (typeof(options.onCreate) === 'function') {
-        options.onCreate();
+    if (options && typeof(options.onCreate) === 'function') {
+         options.onCreate();
     }
-
-    // store options for later use
-    options = opts;
   };
 
   var _close_modal = function() {
@@ -126,8 +131,8 @@ Mozilla.Modal = (function(w, $) {
     $d.off('.' + evtNamespace);
 
     // execute (optional) callback
-    if (_options && typeof(_options.onDestroy) === 'function') {
-      _options.onDestroy();
+    if (options && typeof(options.onDestroy) === 'function') {
+      options.onDestroy();
     }
 
     // free up options
@@ -136,14 +141,11 @@ Mozilla.Modal = (function(w, $) {
 
   return {
     createModal: function(origin, content, opts) {
-      _createModal(origin, content, opts);
+        _create_modal(origin, content, opts);
     },
     closeModal: function() {
-      _closeModal();
+        _close_modal();
     }
   };
 })(window, window.jQuery);
 
-$(document).ready(function() {
-  Mozilla.Modal.init();
-});
