@@ -55,7 +55,7 @@ Mozilla.Modal = (function(w, $) {
         '</div>';
 
     if (options && !options.allowScroll) {
-        $body.addClass('noscroll');
+        $_body.addClass('noscroll');
     }
 
     // Add modal to page
@@ -66,6 +66,8 @@ Mozilla.Modal = (function(w, $) {
     $_content = content;
     $_content_parent = content.parent();
 
+    $_content = content;
+    $_content_parent = content.parent();
     $("#modal .inner").append(content);
     $_content.addClass('overlay-contents');
 
@@ -148,4 +150,3 @@ Mozilla.Modal = (function(w, $) {
     }
   };
 })(window, window.jQuery);
-
