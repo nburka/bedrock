@@ -55,7 +55,7 @@ Mozilla.Modal = (function(w, $) {
         '</div>';
 
     if (options && !options.allowScroll) {
-        $_body.addClass('noscroll');
+        $body.addClass('noscroll');
     }
 
     // Add modal to page
