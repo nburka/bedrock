@@ -502,7 +502,6 @@ MINIFY_BUNDLES = {
         ),
         'geolocation': (
             'js/libs/jquery-1.4.4.min.js',
-            'js/base/mozilla-expanders.js',
             'js/firefox/geolocation-demo.js',
             'js/base/mozilla-expanders.js',
             'js/base/footer-email-form.js',
