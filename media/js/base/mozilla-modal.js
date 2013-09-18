@@ -25,6 +25,7 @@ Mozilla.Modal = (function(w, $) {
       allowScroll: boolean - allow/restrict page scrolling when modal is open
   */
   var _create_modal = function(origin, content, opts) {
+    content = $(content);
     options = opts;
 
     // Make sure modal is closed (if one exists)

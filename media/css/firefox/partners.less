@@ -459,6 +459,7 @@
 }
 
 .js #pageslide #form {
+    position: relative;
     text-shadow: 1px 1px #000;
     color: #fff;
     h3 {
@@ -470,7 +471,6 @@
 }
 
 #form {
-    .close { display: none; }
     p {
         font-size: 16px;
     }
@@ -495,6 +495,10 @@
 
     .footer-field input {
         width: 218px;
+    }
+
+    #pageslider-close {
+        display: none;
     }
 }
 
@@ -528,6 +532,10 @@
         color: rgb(175,50,50);
         font-weight: bold;
         text-transform: uppercase;
+    }
+
+    #pageslider-close {
+        display: block;
     }
 }
 
@@ -712,8 +720,25 @@
     }
 
     .close {
-        top: 25px;
-        right: 25px;
+        position: absolute;
+        top: 0;
+        right: 0;
+
+        color: #fff;
+        font-family: 'Open Sans', sans-serif;
+        font-size: 16px;
+        padding: 5px 28px 5px 5px;
+        cursor: pointer;
+        border: 0;
+        background: url(/media/img/firefox/partners/modal-close.png) right top no-repeat;
+        height: 32px;
+        padding-right: 40px;
+
+        &:hover,
+        &:focus {
+            color: rgba(255, 255, 255, 0.8);
+            background-position: right -32px;
+        }
     }
 
     .partner-article .article-content .intro h4 {

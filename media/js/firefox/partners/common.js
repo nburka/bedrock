@@ -52,9 +52,9 @@
 
     $("a.modal").click(function(e) {
         e.preventDefault();
+
         // Extract the target element's ID from the link's href.
         var elem = $(this).attr('href').replace(/.*?(#.*)/g, '$1');
-
         Mozilla.Modal.createModal(this, elem);
 
         return false;
