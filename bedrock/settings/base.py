@@ -501,8 +501,6 @@ MINIFY_BUNDLES = {
         'geolocation': (
             'js/base/mozilla-expanders.js',
             'js/firefox/geolocation-demo.js',
-            'js/base/mozilla-expanders.js',
-            'js/base/footer-email-form.js',
             'js/base/mozilla-modal.js',
         ),
         'home': (
