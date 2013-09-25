@@ -16,6 +16,13 @@ Mozilla.Modal = (function(w, $) {
   var $_contentParent;
   var $_content;
 
+  if (typeof window.trans == "undefined") {
+    var closeText = 'Close'; // works on older pages on the site
+  } else {
+    //TODO var closeText = window.trans('close');
+    var closeText = 'Close';
+  }
+
   /*
     origin: element that triggered the modal
     content: content to display in the modal
@@ -28,17 +35,10 @@ Mozilla.Modal = (function(w, $) {
 
     // Make sure modal is closed (if one exists)
     if (open) {
-        _closeModal();
+      _closeModal();
     }
 
     // Create new modal
-    if (typeof window.trans == "undefined") {
-        var closeText = 'Close'; // works on older pages on the site
-    } else {
-        //TODO var closeText = window.trans('close');
-        var closeText = 'Close';
-    }
-
     var title = (options && options.title) ? options.title : '';
 
     var $modal = $(
@@ -57,9 +57,9 @@ Mozilla.Modal = (function(w, $) {
     $body.append($modal);
 
     if (options && !options.allowScroll) {
-        $body.addClass('noscroll');
+      $body.addClass('noscroll');
     } else {
-        $body.removeClass('noscroll');
+      $body.removeClass('noscroll');
     }
 
     $_content = content;
@@ -72,20 +72,20 @@ Mozilla.Modal = (function(w, $) {
 
     // close modal on clicking the background (but not bubbled event).
     $('#modal .window').click(function (e) {
-        if (e.target === this) {
-            _closeModal();
-        }
+      if (e.target === this) {
+        _closeModal();
+      }
     });
 
     $modal.fadeIn('fast', function() {
-        $modal.focus();
+      $modal.focus();
     });
 
     // close with escape key
     $d.on('keyup.' + evtNamespace, function(e) {
-        if (e.keyCode === 27 && open) {
-            _closeModal();
-        }
+      if (e.keyCode === 27 && open) {
+          _closeModal();
+      }
     });
 
     // prevent focusing out of modal while open
@@ -104,14 +104,14 @@ Mozilla.Modal = (function(w, $) {
 
     // execute (optional) open callback
     if (options && typeof(options.onCreate) === 'function') {
-         options.onCreate();
+       options.onCreate();
     }
   };
 
   var _closeModal = function() {
     $('#modal').fadeOut('fast', function() {
-        $_contentParent.append($_content);
-        $(this).remove();
+       $_contentParent.append($_content);
+       $(this).remove();
     });
 
     // allow page to scroll again
@@ -137,10 +137,10 @@ Mozilla.Modal = (function(w, $) {
 
   return {
     createModal: function(origin, content, opts) {
-        _createModal(origin, content, opts);
+      _createModal(origin, content, opts);
     },
     closeModal: function() {
-        _closeModal();
+      _closeModal();
     }
   };
 })(window, window.jQuery);
