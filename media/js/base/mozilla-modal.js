@@ -13,7 +13,7 @@ Mozilla.Modal = (function(w, $) {
   var $d = $(w.document);
   var evtNamespace = 'moz-modal';
 
-  var $_content_parent;
+  var $_contentParent;
   var $_content;
 
   /*
@@ -24,63 +24,56 @@ Mozilla.Modal = (function(w, $) {
       onDestroy: function to fire after modal has been closed
       allowScroll: boolean - allow/restrict page scrolling when modal is open
   */
-  var _create_modal = function(origin, content, opts) {
-    content = $(content);
-    options = opts;
+  var _createModal = function(origin, content, options) {
 
     // Make sure modal is closed (if one exists)
     if (open) {
-        _close_modal();
+        _closeModal();
     }
 
     // Create new modal
     if (typeof window.trans == "undefined") {
-        var close_text = 'Close'; // works on older pages on the site
+        var closeText = 'Close'; // works on older pages on the site
     } else {
-        //TODO var close_text = window.trans('close');
-        var close_text = 'Close';
+        //TODO var closeText = window.trans('close');
+        var closeText = 'Close';
     }
 
     var title = (options && options.title) ? options.title : '';
 
-    var html =
+    var $modal = $(
         '<div id="modal" role="dialog" aria-labelledby="' + origin.getAttribute('id') + '" tabindex="-1">' +
         '  <div class="window">' +
         '    <div class="inner">' +
         '      <header>' + title + '</header>' +
         '      <button type="button" id="modal-close" class="close">' +
-        '        <span class="close-text">' + close_text + '</span>' +
+        '        <span class="close-text">' + closeText + '</span>' +
         '      </button>' +
         '    </div>' +
         '  </div>' +
-        '</div>';
+        '</div>');
+
+    // Add modal to page
+    $body.append($modal);
 
     if (options && !options.allowScroll) {
         $body.addClass('noscroll');
+    } else {
+        $body.removeClass('noscroll');
     }
 
-    // Add modal to page
-    $body.append(html);
-
-    $modal = $('#modal');
-
     $_content = content;
-    $_content_parent = content.parent();
-
-    $_content = content;
-    $_content_parent = content.parent();
-    $("#modal .inner").append(content);
+    $_contentParent = $_content.parent();
+    $('#modal .inner').append($_content);
     $_content.addClass('overlay-contents');
 
     // close modal on clicking close button or background.
-    $('#modal-close').click(function (e) {
-        _close_modal();
-    });
+    $('#modal-close').click(_closeModal);
 
     // close modal on clicking the background (but not bubbled event).
-    $('#modal').click(function (e) {
-        if (e.target == this) {
-            _close_modal();
+    $('#modal .window').click(function (e) {
+        if (e.target === this) {
+            _closeModal();
         }
     });
 
@@ -91,7 +84,7 @@ Mozilla.Modal = (function(w, $) {
     // close with escape key
     $d.on('keyup.' + evtNamespace, function(e) {
         if (e.keyCode === 27 && open) {
-            _close_modal();
+            _closeModal();
         }
     });
 
@@ -105,7 +98,7 @@ Mozilla.Modal = (function(w, $) {
     });
 
     // remember which element opened the modal for later focus
-    $(origin).addClass('modalOrigin');
+    $(origin).addClass('modal-origin');
 
     open = true;
 
@@ -115,9 +108,9 @@ Mozilla.Modal = (function(w, $) {
     }
   };
 
-  var _close_modal = function() {
+  var _closeModal = function() {
     $('#modal').fadeOut('fast', function() {
-        $_content_parent.append($_content);
+        $_contentParent.append($_content);
         $(this).remove();
     });
 
@@ -125,7 +118,7 @@ Mozilla.Modal = (function(w, $) {
     $body.removeClass('noscroll');
 
     // restore focus to element that opened the modal
-    $('.modalOrigin').focus().removeClass('modalOrigin');
+    $('.modal-origin').focus().removeClass('modal-origin');
 
     open = false;
     $modal = null;
@@ -144,10 +137,10 @@ Mozilla.Modal = (function(w, $) {
 
   return {
     createModal: function(origin, content, opts) {
-        _create_modal(origin, content, opts);
+        _createModal(origin, content, opts);
     },
     closeModal: function() {
-        _close_modal();
+        _closeModal();
     }
   };
 })(window, window.jQuery);
